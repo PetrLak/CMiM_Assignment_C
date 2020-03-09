@@ -21,8 +21,12 @@ while given == 1
     
     plot(t_dt, u_dt, 'k-')
     hold on
-    plot(t_halved, u_halved, 'r--')
+    plot(t_halved, u_halved, 'r--', 'LineWidth', 1.4)
+    title({'Population Growth', 'Two Timesteps'})
     xlabel('t'); ylabel('N(t)');
+    leg_dt = strcat('Used step size dt=', num2str(dt));
+    leg_dt_halved = strcat('Used step size dt=', num2str(dt_halved));
+    legend(leg_dt, leg_dt_halved);
     hold off
     fprintf('Last timestep: %g\n', dt_halved)
     
