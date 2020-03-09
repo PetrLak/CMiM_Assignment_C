@@ -8,4 +8,29 @@ N_0 = 100; % Initial population size
 f = @(N,t) r*(1-N/M)*N; % logistic equation
 
 % Solves differential equations for initial time step size dt
-[u_dt, t_dt] = ode_FE(f, N_0, dt, T)
+[u_dt, t_dt] = ode_FE(f, N_0, dt, T);
+
+k = 1; % Initial k for While loop
+given = 1;
+
+while given == 1
+    dt_halved = 2^(-k)*dt;
+    
+    % Solves differential equations for halved time step size dt_halved
+    [u_halved, t_halved] = ode_FE(f, N_0, dt_halved, T);
+    
+    plot(t_dt, u_dt, 'k-')
+    hold on
+    plot(t_halved, u_halved, 'r--')
+    xlabel('t'); ylabel('N(t)');
+    hold off
+    fprintf('Last timestep: %g\n', dt_halved)
+    
+    given = input('Continue with smaller time step? 1 for YES, 0 for NO.\n');
+    if given == 1
+        k = k + 1;
+        u_dt = u_halved;
+        t_dt = t_halved;
+        dt = dt_halved;
+    end
+end
