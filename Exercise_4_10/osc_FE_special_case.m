@@ -19,3 +19,15 @@ for n = 1:N_t
     v(n+1) = v(n) - dt*omega^2*u(n);
     u(n+1) = u(n) + dt*v(n);
 end
+
+% NOTE: These are not exactly the physical potential and kinetic energy!
+[U, KE] = osc_energy(u, v, omega);
+
+% Plotting the total energy (sum of Potential U and Kinetic energy KE)
+SumE = U + KE;
+plot(t, SumE, 'r-');
+xlabel('t');
+leg_dt = strcat('Used step size dt=', num2str(dt));
+legend(leg_dt)
+title('Forward Euler method')
+ylabel('Kinetic + potential energy');
