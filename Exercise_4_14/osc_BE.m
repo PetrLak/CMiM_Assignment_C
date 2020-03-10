@@ -25,12 +25,12 @@ v(1,:) = v_0;
     end
     
 hold on
-plot(t, u(:,ii), 'b--');
+plot(t, u(:,ii), '--');
 end
 
 plot(t, X_0*cos(omega*t), 'g-');
 
-legend('numerical', 'exact');
+legend('numerical1', 'numerical2', 'exact');
 title('Backward Euler scheme')
 xlabel('t'); ylabel('Position of mass u');
 
